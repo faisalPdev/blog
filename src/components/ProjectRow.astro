@@ -1,0 +1,27 @@
+---
+import type { Project } from '../config/projects';
+
+interface Props {
+  project: Project;
+  href?: string;
+  delay?: number;
+}
+
+const { project, href, delay = 0 } = Astro.props;
+const delayClass = delay > 0 ? `reveal-delay-${delay}` : undefined;
+---
+
+<a href={href ?? `/work#${project.slug}`} class:list={['project-row', 'reveal', delayClass]}>
+  <div class="project-index">{project.index}</div>
+  <div class="project-content">
+    <div class="project-tags">
+      {project.featured && <span class="project-tag featured">Featured</span>}
+      {project.featuredTags.map((tag) => (
+        <span class="project-tag">{tag}</span>
+      ))}
+    </div>
+    <div class="project-title">{project.title}</div>
+    <div class="project-desc">{project.summary}</div>
+  </div>
+  <div class="project-arrow">&rarr;</div>
+</a>

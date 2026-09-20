@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const experiences = [
+  {
+    company: 'Neura Dynamics AI',
+    role: 'Software Development Engineer - 1',
+    period: 'Jan 2025 - Present',
+    location: 'Remote · Full Time',
+    logoSrc: '/logos/neura-dynamics.webp',
+    initials: 'ND',
+    summary:
+      'Building scalable backend services, AI/LLM applications, and cloud infrastructure for production systems — from REST APIs and real-time features to agentic workflows and ML pipelines.',
+    highlights: [
+      'Built scalable backend services and REST APIs using Python, FastAPI, PostgreSQL, Redis, Celery, and WebSockets — handling complex business logic, authentication, and real-time features, with optimized database design, indexing, and caching for performance.',
+      'Developed AI/LLM-powered and agentic applications using LangChain, LangGraph, RAG, embeddings, and multi-LLM providers — including tool-calling agents with prompt engineering, verification, evaluation, and monitoring for automated business workflows.',
+      'Built AI and ML pipelines for real-time analytics, anomaly detection, forecasting, and intelligent insights using telemetry data, Kafka, XGBoost, and Isolation Forest.',
+      'Designed third-party API integrations for scheduling, virtual classrooms, local/international payments, and notifications, using async workflows.',
+      'Ensured reliability through testing and observability — Pytest for unit/integration coverage, and Logfire, Sentry, LangSmith, and Better Stack for monitoring, error tracking, and LLM evaluation.',
+      'Managed cloud infrastructure and delivery — Docker, Kubernetes/AKS, Azure, Nginx, and CI/CD pipelines across dev/staging/prod, while collaborating with cross-functional teams and clients in Agile sprints.',
+    ],
+    stack: [
+      'Python',
+      'FastAPI',
+      'PostgreSQL',
+      'SQLAlchemy',
+      'Redis',
+      'Celery',
+      'WebSockets',
+      'LLMs',
+      'LangChain',
+      'LangGraph',
+      'RAG',
+      'Pytest',
+      'Docker',
+      'Kubernetes',
+      'Azure',
+      'CI/CD',
+    ],
+  },
+  {
+    company: 'First Logic Meta Lab',
+    role: 'Backend Engineer',
+    period: 'Aug 2024 - Jan 2025',
+    location: 'Remote / India',
+    logoSrc: '/logos/first-logic-meta-lab.jpeg',
+    initials: 'FL',
+    summary:
+      'Built backend services with FastAPI, REST APIs, and GraphQL using Ariadne, with Docker for containerized deployment.',
+    highlights: [
+      'Developed REST and GraphQL APIs with FastAPI and Ariadne.',
+      'Implemented backend services and API layers for production use.',
+      'Used Docker to containerize and run services consistently across environments.',
+    ],
+    stack: ['FastAPI', 'GraphQL', 'Ariadne', 'REST API', 'Docker'],
+  },
+];
+---
+
+<BaseLayout title="Experience">
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">experience</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="experience-intro reveal">
+      <p>A detailed view of my professional experience, the companies I have worked with, the systems I have built, and the technologies I use in real projects.</p>
+    </div>
+
+    <div class="experience-list">
+      {experiences.map((experience, index) => (
+        <article class:list={['experience-card', 'reveal', { 'reveal-delay-1': index === 1, 'reveal-delay-2': index === 2 }]}>
+          <div class="experience-logo" aria-label={`${experience.company} logo`}>
+            {experience.logoSrc ? (
+              <img src={experience.logoSrc} alt={`${experience.company} logo`} loading="lazy" />
+            ) : (
+              <span>{experience.initials}</span>
+            )}
+          </div>
+
+          <div class="experience-content">
+            <div class="experience-meta">
+              <span>{experience.period}</span>
+              <span>{experience.location}</span>
+            </div>
+
+            <h3>{experience.role}</h3>
+            <p class="experience-company">{experience.company}</p>
+            <p class="experience-summary">{experience.summary}</p>
+
+            <div class="experience-block">
+              <h4>Key Work</h4>
+              <ul>
+                {experience.highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="experience-block">
+              <h4>Stack</h4>
+              <div class="experience-stack">
+                {experience.stack.map((item) => (
+                  <span>{item}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

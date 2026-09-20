@@ -1,0 +1,48 @@
+---
+import SocialIcon from './SocialIcon.astro';
+import { calUrl } from '../config/site';
+---
+
+<footer>
+  <div class="footer-start">
+    <div class="footer-logo">Faisal P<span>.</span></div>
+    <div class="footer-social">
+      <a href="mailto:mohdfaisal9072@gmail.com" aria-label="Email">
+        <SocialIcon name="email" />
+      </a>
+      <a href="https://github.com/faisalpdev" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <SocialIcon name="github" />
+      </a>
+      <a href="https://linkedin.com/in/faisal-p/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <SocialIcon name="linkedin" />
+      </a>
+      <a href={calUrl} target="_blank" rel="noopener noreferrer" aria-label="Book a call on Cal.com">
+        <SocialIcon name="cal" />
+      </a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <div class="footer-copy-muted">
+      <a
+        href="https://astro.build"
+        class="footer-astro"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        built with astro
+        <img
+          src="/logos/astro-logo.png"
+          alt=""
+          class="footer-astro-logo"
+          width="18"
+          height="18"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <span class="footer-copy-sep">&middot;</span>
+      <span>&copy; 2026</span>
+    </div>
+  </div>
+  <a href="#" class="footer-back">Back to top &uarr;</a>
+</footer>

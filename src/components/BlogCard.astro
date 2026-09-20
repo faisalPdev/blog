@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ContentTags from './ContentTags.astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  delay?: string;
+}
+
+const { post, delay = '' } = Astro.props;
+const { title, description, category, tags, pubDate } = post.data;
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+const href = `/posts/${post.slug}`;
+---
+
+<article class:list={['blog-card', 'reveal', delay]}>
+  <a href={href} class="blog-card-link">
+    <span class="blog-category">{category}</span>
+    <div class="blog-date">{formattedDate}</div>
+    <ContentTags tags={tags} class="blog-card-tags" />
+    <div class="blog-title">{title}</div>
+    <div class="blog-excerpt">{description}</div>
+    <span class="blog-read">Read post</span>
+  </a>
+</article>

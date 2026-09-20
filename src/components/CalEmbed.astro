@@ -1,0 +1,66 @@
+---
+const namespace = 'contact';
+---
+
+<script define:vars={{ namespace }}>
+  function getCalTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  }
+
+  function bootCal() {
+    (function (C, A, L) {
+      const p = (a, ar) => a.q.push(ar);
+      const d = C.document;
+      C.Cal =
+        C.Cal ||
+        function () {
+          const cal = C.Cal;
+          const ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement('script')).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () {
+              p(api, arguments);
+            };
+            const ns = ar[1];
+            api.q = api.q || [];
+            if (typeof ns === 'string') {
+              cal.ns[ns] = cal.ns[ns] || api;
+              p(cal.ns[ns], ar);
+              p(cal, ['initNamespace', ns]);
+            } else {
+              p(cal, ar);
+            }
+            return;
+          }
+          p(cal, ar);
+        };
+    })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+    window.Cal('init', namespace, { origin: 'https://cal.com' });
+
+    window.Cal.ns[namespace]('ui', {
+      styles: { branding: { brandColor: '#2f6f3e' } },
+      theme: getCalTheme(),
+    });
+  }
+
+  function syncCalTheme() {
+    if (!window.Cal?.ns?.[namespace]) return;
+    window.Cal.ns[namespace]('ui', { theme: getCalTheme() });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootCal, { once: true });
+  } else {
+    bootCal();
+  }
+
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    window.setTimeout(syncCalTheme, 50);
+  });
+</script>

@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BlogCard from './BlogCard.astro';
+import ProjectRow from './ProjectRow.astro';
+import { projects } from '../config/projects';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const featuredPost = posts.find((p) => p.data.featured) ?? posts[0];
+const featuredProjects = projects.filter((project) => project.featured);
+const hasProjects = featuredProjects.length > 0;
+---
+
+<section class="section home-featured">
+  <div class="section-header">
+    <span class="section-num">*</span>
+    <h2 class="section-title">featured</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  {hasProjects && (
+    <div class="home-featured-block">
+      <div class="home-featured-label">work/</div>
+      <div class="projects-grid">
+        {featuredProjects.map((project, index) => (
+          <ProjectRow project={project} delay={index} />
+        ))}
+      </div>
+      <a href="/work" class="section-view-all">ls projects &rarr;</a>
+    </div>
+  )}
+
+  {featuredPost && (
+    <div class="home-featured-block">
+      <div class="home-featured-label">posts/</div>
+      <div class="blog-grid home-featured-posts">
+        <BlogCard post={featuredPost} />
+      </div>
+      <a href="/posts" class="section-view-all">cat posts &rarr;</a>
+    </div>
+  )}
+</section>

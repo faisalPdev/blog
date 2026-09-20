@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import SiteScripts from '../components/SiteScripts.astro';
+import SearchPalette from '../components/SearchPalette.astro';
+
+interface Props {
+  title: string;
+  heroRotate?: boolean;
+}
+
+const { title, heroRotate = false } = Astro.props;
+const pageTitle = title === 'Home' ? 'Faisal P — Portfolio' : `${title} — Faisal P`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{pageTitle}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script is:inline>
+    (function () {
+      const stored = localStorage.getItem('theme');
+      document.documentElement.setAttribute('data-theme', stored || 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <div class="page-shell">
+    <Nav />
+    <slot />
+    <Footer />
+  </div>
+
+  <SearchPalette />
+
+  <SiteScripts heroRotate={heroRotate} />
+</body>
+</html>

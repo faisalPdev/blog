@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const skillGroups = [
+  {
+    name: 'Backend',
+    items: [
+      'Python',
+      'FastAPI',
+      'Django REST Framework',
+      'REST API',
+      'GraphQL',
+      'PostgreSQL',
+      'Django ORM',
+      'SQLAlchemy',
+      'Tortoise',
+      'WebSockets',
+      'Redis',
+      'Celery',
+      'Integrations',
+      'Microservices',
+      'Pytest',
+    ],
+  },
+  {
+    name: 'AI / ML',
+    items: [
+      'LLM',
+      'LangChain',
+      'LangGraph',
+      'RAG',
+      'Embeddings',
+      'Qdrant',
+      'FAISS',
+      'pgvector',
+      'Agentic Workflows',
+      'Tool Calling',
+      'Prompt Engineering',
+      'Fine-tuning',
+      'MCP',
+      'LLM Evaluation',
+      'LangSmith',
+      'XGBoost',
+      'Isolation Forest',
+      'PyTorch',
+      'TensorFlow',
+      'Scikit-learn',
+    ],
+  },
+  {
+    name: 'Frontend',
+    items: [
+      'HTML5',
+      'CSS3',
+      'JavaScript',
+      'TypeScript',
+      'React',
+      'Bootstrap',
+      'Tailwind',
+    ],
+  },
+  {
+    name: 'Tools & DevOps',
+    items: [
+      'Git',
+      'GitHub',
+      'Docker',
+      'Kubernetes',
+      'Nginx',
+      'GitHub Actions',
+      'CI/CD',
+      'Jira',
+      'Bitbucket',
+      'Azure DevOps',
+      'Azure',
+      'Azure AI Services',
+      'Claude Code',
+      'Cursor',
+      'Codex',
+    ],
+  },
+];
+---
+
+<BaseLayout title="About">
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About <em>me</em></h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="about-body about-sections reveal">
+      <article class="about-section" id="about-me">
+        <h3>About Me</h3>
+        <p>Hi, I'm <strong>Faisal P</strong>, a <strong>Full-Stack and AI Engineer</strong> from Kerala, India.</p>
+        <p>I enjoy building scalable backend systems, modern web applications, cloud infrastructure, and AI-powered solutions. My work mainly focuses on backend engineering, agentic AI systems, RAG applications, APIs, automation, and production-ready software.</p>
+        <p>I like working on systems that are simple, useful, reliable, and built with a clear purpose.</p>
+      </article>
+
+      <article class="about-section" id="my-experience">
+        <h3>My Experience</h3>
+        <p>I work as a <strong>Software Development Engineer - 1 at Neura Dynamics AI</strong>, where I build backend services, AI workflows, and cloud-based applications.</p>
+        <p><a class="about-inline-link" href="/experience">View detailed experience &rarr;</a></p>
+        <p><a class="about-inline-link" href="/work">View selected AI projects &rarr;</a></p>
+        <p>My work spans EdTech platforms, AI assistants, EV fleet analytics, payment integrations, and production backend systems.</p>
+        <p>I enjoy working across the full stack, but my strongest focus is on backend systems, AI engineering, and cloud infrastructure.</p>
+      </article>
+
+      <article class="about-section" id="skills">
+        <h3>Skills</h3>
+        <p>The tools and systems I use to design, build, and ship production software.</p>
+        <div class="skill-groups">
+          {skillGroups.map((group) => (
+            <div class="skill-group">
+              <h4>{group.name}</h4>
+              <div class="experience-stack">
+                {group.items.map((item) => (
+                  <span>{item}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </article>
+
+      <article class="about-section" id="education">
+        <h3>Education</h3>
+        <div class="education-card">
+          <div class="education-logo" aria-label="APJ Abdul Kalam Technological University logo">
+            <img src="/logos/ktu.jpeg" alt="APJ Abdul Kalam Technological University logo" loading="lazy" />
+          </div>
+          <div class="education-content">
+            <p class="education-school">APJ Abdul Kalam Technological University</p>
+            <p><strong>Bachelor of Technology - BTech, Computer Science</strong></p>
+            <p>MGM College of Engineering and Pharmaceutical Sciences, Valanchery, Malappuram, Kerala</p>
+            <div class="education-meta">
+              <span>2020 - 2024</span>
+              <span>CGPA 7.53</span>
+              <span>First Class</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="education-card">
+          <div class="education-logo" aria-label="Kerala Board of Public Examination logo">
+            <img src="/logos/kbpe.jpeg" alt="Kerala Board of Public Examination logo" loading="lazy" />
+          </div>
+          <div class="education-content">
+            <p class="education-school">Kerala Board of Public Examination (KBPE)</p>
+            <p><strong>Higher Secondary Certificate Program, Computer Science</strong></p>
+            <p>National Higher Secondary School, Kolathur, Malappuram</p>
+            <div class="education-meta">
+              <span>2018 - 2020</span>
+              <span>87%</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="about-section" id="why-i-started-this-blog">
+        <h3>Why I Started This Blog</h3>
+        <p>I started this blog as a place to document what I learn, build, and explore.</p>
+        <p>In software engineering, many useful lessons come from real implementation work: debugging issues, designing systems, integrating APIs, handling production problems, and experimenting with new tools.</p>
+        <p>This blog is my space to share those learnings in a practical and simple way. It also helps me organize my thoughts, track my growth, and share useful knowledge with other developers.</p>
+      </article>
+
+      <article class="about-section" id="what-i-write-about">
+        <h3>What I Write About</h3>
+        <p>I mainly write about topics related to software engineering, AI, and real-world development.</p>
+        <p>Some of the topics include:</p>
+        <ul>
+          <li>Backend development</li>
+          <li>FastAPI and Python</li>
+          <li>Full-stack application development</li>
+          <li>Agentic AI and LangGraph</li>
+          <li>RAG systems and LLM applications</li>
+          <li>Cloud infrastructure and deployment</li>
+          <li>Docker, Redis, PostgreSQL, and system design</li>
+          <li>Developer tools, productivity, and AI coding workflows</li>
+          <li>Debugging notes and lessons from real projects</li>
+        </ul>
+      </article>
+
+      <article class="about-section" id="what-readers-can-expect">
+        <h3>What Readers Can Expect</h3>
+        <p>Readers can expect practical, beginner-friendly, and real-world focused content.</p>
+        <p>I try to write in a simple way, without unnecessary complexity. My goal is to share useful explanations, implementation notes, architecture ideas, mistakes I faced, and things I learned while building actual systems.</p>
+        <p>This blog is not just about theory. It is about what works in practice.</p>
+      </article>
+
+      <article class="about-section" id="my-approach-values">
+        <h3>My Approach / Values</h3>
+        <p>I believe good software should be simple, reliable, and easy to maintain.</p>
+        <p>My approach is:</p>
+        <ul>
+          <li>Build simple before building complex</li>
+          <li>Understand the problem clearly</li>
+          <li>Write clean and maintainable code</li>
+          <li>Automate repetitive work</li>
+          <li>Learn by building real things</li>
+          <li>Keep improving one step at a time</li>
+          <li>Share knowledge openly</li>
+        </ul>
+        <p>For me, engineering is not only about writing code. It is about solving problems clearly and building systems that people can actually use.</p>
+      </article>
+
+      <article class="about-section" id="lets-connect">
+        <h3>Let's Connect</h3>
+        <p>I'm always open to connecting with developers, founders, and people working on interesting products.</p>
+        <p>You can reach out to me for:</p>
+        <ul>
+          <li>AI and backend engineering discussions</li>
+          <li>Collaboration opportunities</li>
+          <li>Freelance or project work</li>
+          <li>Open-source ideas</li>
+          <li>Technical conversations</li>
+        </ul>
+        <p>Feel free to connect with me through my social links or contact form.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

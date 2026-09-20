@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects } from '../config/projects';
+---
+
+<BaseLayout title="Work">
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">projects</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="experience-intro reveal">
+      <p>Production AI systems I have designed and shipped &mdash; LLM workflow automation, configurable RAG platforms, and real-time fleet intelligence.</p>
+    </div>
+
+    <div class="experience-list">
+      {projects.map((project, index) => (
+        <article
+          id={project.slug}
+          class:list={[
+            'project-card',
+            'reveal',
+            { 'reveal-delay-1': index === 1, 'reveal-delay-2': index === 2 },
+          ]}
+        >
+          <div class="project-card-top">
+            <div class="project-index">{project.index}</div>
+            <div class="project-content">
+              <div class="project-tags">
+                <span class="project-tag featured">Featured</span>
+                {project.featuredTags.map((tag) => (
+                  <span class="project-tag">{tag}</span>
+                ))}
+              </div>
+              <h3 class="project-title">{project.title}</h3>
+              {project.client && <p class="project-client">{project.client}</p>}
+            </div>
+          </div>
+
+          <div class="experience-block">
+            <h4>Problem</h4>
+            <p>{project.problem}</p>
+          </div>
+
+          <div class="experience-block">
+            <h4>Architecture</h4>
+            <ul>
+              {project.architecture.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="experience-block">
+            <h4>Outcome</h4>
+            <p>{project.outcome}</p>
+          </div>
+
+          <div class="experience-block">
+            <h4>Stack</h4>
+            <div class="experience-stack">
+              {project.stack.map((item) => (
+                <span>{item}</span>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

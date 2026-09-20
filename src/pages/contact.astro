@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CalEmbed from '../components/CalEmbed.astro';
+import SocialIcon from '../components/SocialIcon.astro';
+import { calLink } from '../config/site';
+---
+
+<BaseLayout title="Contact">
+  <section class="section contact-section">
+    <div class="contact-wrap">
+      <div class="contact-left split-card reveal">
+        <div class="split-card-body">
+        <h2 class="contact-headline">build<br>something <em>useful.</em></h2>
+        <p class="contact-body">Whether you have a project in mind, a question about my work, or just want to say hello &mdash; my inbox is always open.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:mohdfaisal9072@gmail.com">
+            <div class="contact-link-left">
+              <SocialIcon name="email" />
+              <div>
+                <div class="contact-link-name">Email</div>
+                <div class="contact-link-handle">mohdfaisal9072@gmail.com</div>
+              </div>
+            </div>
+            <span class="contact-link-arrow">&rarr;</span>
+          </a>
+
+          <a class="contact-link" href="https://github.com/faisalpdev" target="_blank" rel="noopener noreferrer">
+            <div class="contact-link-left">
+              <SocialIcon name="github" />
+              <div>
+                <div class="contact-link-name">GitHub</div>
+                <div class="contact-link-handle">github.com/faisalpdev</div>
+              </div>
+            </div>
+            <span class="contact-link-arrow">&rarr;</span>
+          </a>
+
+          <a class="contact-link" href="https://linkedin.com/in/faisal-p/" target="_blank" rel="noopener noreferrer">
+            <div class="contact-link-left">
+              <SocialIcon name="linkedin" />
+              <div>
+                <div class="contact-link-name">LinkedIn</div>
+                <div class="contact-link-handle">linkedin.com/in/faisal-p/</div>
+              </div>
+            </div>
+            <span class="contact-link-arrow">&rarr;</span>
+          </a>
+
+          <button
+            type="button"
+            class="contact-link"
+            data-cal-namespace="contact"
+            data-cal-link={calLink}
+            data-cal-config='{"layout":"month_view"}'
+          >
+            <div class="contact-link-left">
+              <SocialIcon name="cal" />
+              <div>
+                <div class="contact-link-name">Book a call</div>
+                <div class="contact-link-handle">cal.com/{calLink}</div>
+              </div>
+            </div>
+            <span class="contact-link-arrow">&rarr;</span>
+          </button>
+        </div>
+        </div>
+      </div>
+
+      <div class="contact-right split-card reveal reveal-delay-1">
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="contact-form-label">Send a message</div>
+          <div class="form-group">
+            <label for="contact-name">Your name</label>
+            <input id="contact-name" name="name" type="text" placeholder="How should I call you?" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email address</label>
+            <input id="contact-email" name="email" type="email" placeholder="Where can I write back?" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-subject">Subject</label>
+            <input id="contact-subject" name="subject" type="text" placeholder="What's on your mind?" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" placeholder="Tell me about your project, idea, or just say hello..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="contact-submit">send --message</button>
+          <div class="contact-form-reaction" id="contact-reaction" role="status" aria-live="polite" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <CalEmbed />
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const reaction = document.getElementById('contact-reaction');
+  const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
+  const defaultLabel = submitBtn?.textContent ?? 'send --message';
+
+  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const appendLine = (text: string, type: 'muted' | 'ok' | 'error') => {
+    if (!reaction) return;
+    const line = document.createElement('p');
+    line.className = `contact-reaction-line contact-reaction-line--${type}`;
+    line.textContent = text;
+    reaction.appendChild(line);
+    requestAnimationFrame(() => line.classList.add('is-visible'));
+  };
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form || !reaction || !submitBtn) return;
+
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '').trim();
+    const email = String(data.get('email') ?? '').trim();
+    const subject = String(data.get('subject') ?? '').trim();
+    const message = String(data.get('message') ?? '').trim();
+
+    reaction.hidden = false;
+    reaction.classList.remove('is-success', 'is-error');
+    reaction.innerHTML = '';
+
+    if (!name || !email || !subject || !message) {
+      reaction.classList.add('is-error');
+      appendLine('[error] missing fields — fill everything in, then try again.', 'error');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'transmitting...';
+    reaction.classList.add('is-active');
+
+    appendLine('> initiating send...', 'muted');
+    await wait(450);
+    appendLine('> encrypting payload...', 'muted');
+    await wait(500);
+    appendLine('> routing to inbox...', 'muted');
+    await wait(550);
+    appendLine(`[ok] message received — thanks, ${name.split(' ')[0]}. I'll reply soon.`, 'ok');
+
+    reaction.classList.add('is-success');
+    submitBtn.textContent = 'sent ✓';
+    form.reset();
+
+    await wait(3200);
+    submitBtn.disabled = false;
+    submitBtn.textContent = defaultLabel;
+    reaction.classList.remove('is-active', 'is-success');
+    reaction.hidden = true;
+    reaction.innerHTML = '';
+  });
+</script>

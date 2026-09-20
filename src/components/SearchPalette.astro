@@ -1,0 +1,124 @@
+---
+const items = [
+  { title: 'Home', href: '/', type: 'page', keywords: 'home terminal hero' },
+  { title: 'About me', href: '/about', type: 'page', keywords: 'about bio skills developer' },
+  { title: 'Skills', href: '/about#skills', type: 'page', keywords: 'skills backend fastapi python langchain langgraph rag kubernetes azure react typescript docker' },
+  { title: 'Experience', href: '/experience', type: 'page', keywords: 'experience career company neura dynamics ai backend fastapi langchain langgraph kubernetes azure' },
+  { title: 'Work & projects', href: '/work', type: 'page', keywords: 'work projects portfolio ai rag fleet' },
+  { title: 'GCC-Based EdTech LLM Workflow Automation', href: '/work#edtech-llm-workflow', type: 'project', keywords: 'edtech llm langchain approval workflow python rest apis gcc' },
+  { title: 'Configurable RAG & AI Agent Platform', href: '/work#configurable-rag-platform', type: 'project', keywords: 'rag agent langgraph vector embeddings langsmith postgresql' },
+  { title: 'EV Fleet Intelligence Platform', href: '/work#ev-fleet-intelligence', type: 'project', keywords: 'ev kafka fleet telemetry battery soh rul langgraph fastapi dubai' },
+  { title: 'Posts', href: '/posts', type: 'page', keywords: 'posts blog essays articles' },
+  { title: 'How I Reduced My AI Coding Costs Without Sacrificing Productivity', href: '/posts/reduced-ai-coding-costs', type: 'post', keywords: 'ai coding costs cursor composer planning productivity workflow' },
+  { title: 'Contact', href: '/contact', type: 'page', keywords: 'contact email github linkedin book call cal.com schedule' },
+];
+---
+
+<div class="search-palette" id="search-palette" hidden>
+  <div class="search-palette-backdrop" data-search-close></div>
+  <div class="search-palette-panel" role="dialog" aria-modal="true" aria-labelledby="search-palette-title">
+    <div class="search-palette-header">
+      <span id="search-palette-title" class="search-palette-title">guest@faisal:~$ grep -i</span>
+      <button type="button" class="search-palette-close" data-search-close aria-label="Close search">&times;</button>
+    </div>
+    <div class="search-palette-input-wrap">
+      <span class="search-palette-prompt">query:</span>
+      <input type="search" class="search-palette-input" id="search-input" placeholder="search pages, projects, posts..." autocomplete="off" />
+    </div>
+    <ul class="search-palette-results" id="search-results"></ul>
+    <p class="search-palette-hint">esc to close &middot; enter to open</p>
+  </div>
+</div>
+
+<script is:inline define:vars={{ items }}>
+  const palette = document.getElementById('search-palette');
+  const input = document.getElementById('search-input');
+  const resultsEl = document.getElementById('search-results');
+  const openBtn = document.getElementById('search-toggle');
+  let activeIndex = 0;
+  let filtered = [...items];
+
+  const render = () => {
+    if (!resultsEl) return;
+    resultsEl.innerHTML = filtered.length
+      ? filtered.map((item, i) => `
+          <li>
+            <a href="${item.href}" class="search-result${i === activeIndex ? ' is-active' : ''}" data-index="${i}">
+              <span class="search-result-type">${item.type}</span>
+              <span class="search-result-title">${item.title}</span>
+            </a>
+          </li>
+        `).join('')
+      : '<li class="search-empty">no matches found</li>';
+  };
+
+  const filter = (q) => {
+    const query = q.trim().toLowerCase();
+    if (!query) {
+      filtered = [...items];
+    } else {
+      filtered = items.filter(item =>
+        item.title.toLowerCase().includes(query) ||
+        item.keywords.toLowerCase().includes(query) ||
+        item.type.includes(query)
+      );
+    }
+    activeIndex = 0;
+    render();
+  };
+
+  const open = () => {
+    palette?.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    filter('');
+    input?.focus();
+  };
+
+  const close = () => {
+    palette?.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+    if (input) input.value = '';
+  };
+
+  openBtn?.addEventListener('click', open);
+
+  document.querySelectorAll('[data-search-close]').forEach(el => {
+    el.addEventListener('click', close);
+  });
+
+  input?.addEventListener('input', (e) => filter(e.target.value));
+
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      close();
+      return;
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIndex = Math.min(activeIndex + 1, filtered.length - 1);
+      render();
+      return;
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIndex = Math.max(activeIndex - 1, 0);
+      render();
+      return;
+    }
+    if (e.key === 'Enter' && filtered[activeIndex]) {
+      window.location.href = filtered[activeIndex].href;
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      palette?.hasAttribute('hidden') ? open() : close();
+    }
+  });
+
+  resultsEl?.addEventListener('click', (e) => {
+    const link = e.target.closest('.search-result');
+    if (link) close();
+  });
+</script>

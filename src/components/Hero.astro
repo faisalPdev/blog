@@ -1,0 +1,140 @@
+---
+const nameAsciiDark = `##########    ######    ######    ########    ######    ##                ########
+##########    ######    ######    ########    ######    ##                ########
+##          ##      ##    ##    ##          ##      ##  ##                ##      ##
+##          ##      ##    ##    ##          ##      ##  ##                ##      ##
+########    ##########    ##      ######    ##########  ##                ########
+########    ##########    ##      ######    ##########  ##                ########
+##          ##      ##    ##            ##  ##      ##  ##                ##
+##          ##      ##    ##            ##  ##      ##  ##                ##
+##          ##      ##  ######  ########    ##      ##  ##########        ##
+##          ##      ##  ######  ########    ##      ##  ##########        ##`;
+
+const nameAsciiLight = `██████████    ██████    ██████    ████████    ██████    ██                ████████
+██████████    ██████    ██████    ████████    ██████    ██                ████████
+██          ██      ██    ██    ██          ██      ██  ██                ██      ██
+██          ██      ██    ██    ██          ██      ██  ██                ██      ██
+████████    ██████████    ██      ██████    ██████████  ██                ████████
+████████    ██████████    ██      ██████    ██████████  ██                ████████
+██          ██      ██    ██            ██  ██      ██  ██                ██
+██          ██      ██    ██            ██  ██      ██  ██                ██
+██          ██      ██  ██████  ████████    ██      ██  ██████████        ██
+██          ██      ██  ██████  ████████    ██      ██  ██████████        ██`;
+
+const portraitAsciiDark = `                          :*.-  - -   =:
+                       :   .               -
+                      -                       *
+                    %                           :
+                   -          : .              :
+                   +   - #              -       .:
+                   *  +                         #
+                   %                           +
+                      :                    %  -
+                    = .     +       :       : -
+                      ::   +*.  +     %+:-  . *.
+                     ++  .+@-=.-     .       *  *
+                    = +    .*.               =.% =
+                    % =         .. :         = =+
+                     -#=     + ++ .+         =. .
+                     ...              +     -
+                      .+-      @       -    +
+                                 .-        -
+
+                           .                 .:
+                            -  . .    -      +% -#+.
+                           ==                 @    .    .:-#*.
+                       :%                     %                 .#-
+                     #       .%              #    .        .        .
+                .#:        .    %-          -:   -
+             -#             .     :@@.     =.
+          +=                         %    %   =                  .
+        +                          +  = *:
+       -                   ..     == #+:
+       -                       *   :  .                            -
+      +                           +                               =`;
+
+const portraitAsciiLight = `
+                                  ███████████
+                           ███   ██         █   ██
+                           █ █   █ ██████████      ██
+                        ██ ███   █ █            ██████
+                      ████       ███              █████
+                      ████    ███                  ██ ██
+                      █ █ ████  ██            █     ██ ██
+                      █ ████  ███            █ █     ████
+                      █ ███████               █     ██ ██
+                      █ ████                    ██ ██ ██
+                      ██████             ████ ██  █████
+                      ██ ██████         ███████ ██ ███
+                        ████  ███ ██   ██████ ██████████
+                        ███████ █████  █ ██ ████  ███████
+                        ████ ████████  ██████     ███████
+                       █ █ █  ██████ ███          █ █████
+                       █ ███     ████████         ███████
+                         ███     █  ██ ██  ███   ██████
+                         ████    █████████ █ █   ████
+                           █     ███   ███████   ███
+                                 ██████████
+                                      ███          █
+                               ███                  █████
+                               ███                 ██████  █████████
+                            ███████                ██████  █     █ ██ ████
+                         ████ █ █ ██              ████   █ █████████  █ ██ █
+                     █████ ████ ██████            ████  ███           ████ █
+                  █████ ████      ███████        ████  ████                █
+              █████ █████          █████████    █████   ██
+           ███ ██████               █████ ███  █████
+           ███████                    █ ███████ ██
+         ██ ███                         █ ████ ██
+        ██ █                        █  █ ██████                       █ █ ██
+        ████                          █  █████                           ███`;
+---
+
+<section class="hero">
+  <div class="hero-terminal">
+    <div class="hero-terminal-header">
+      <div class="hero-terminal-dots" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <span class="hero-terminal-title">guest@faisal — ssh</span>
+    </div>
+    <div class="hero-terminal-body">
+      <div class="hero-rotate" id="hero-rotate">
+        <div class="hero-slide is-active">
+          <div class="hero-issue">whoami</div>
+          <h1 class="visually-hidden">Hey, I'm Faisal P</h1>
+          <div class="hero-ascii-banner">
+            <div class="hero-whoami-row">
+              <div class="hero-whoami-left">
+                <p class="hero-ascii-greeting">Hey, I'm</p>
+                <pre class="hero-ascii hero-ascii-name hero-ascii-name--dark" aria-hidden="true">{nameAsciiDark}</pre>
+                <pre class="hero-ascii hero-ascii-name hero-ascii-name--light" aria-hidden="true">{nameAsciiLight}</pre>
+                <div class="hero-ascii-tagline">
+                  <p class="hero-ascii-role">Full-Stack &amp; AI Engineer</p>
+                  <p class="hero-ascii-tag">Building intelligent systems.</p>
+                </div>
+              </div>
+              <pre class="hero-ascii-portrait hero-ascii-portrait--dark" aria-hidden="true">{portraitAsciiDark}</pre>
+              <pre class="hero-ascii-portrait hero-ascii-portrait--light" aria-hidden="true">{portraitAsciiLight}</pre>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slide">
+          <div class="hero-issue">status</div>
+          <div class="hero-output">
+            <span class="hero-output-label">[ok] profile loaded</span>
+            Software Engineer, AI enthusiast, and product builder focused on crafting applications that are scalable, practical, and enjoyable to use&mdash;from backend infrastructure to polished user experiences.
+          </div>
+        </div>
+        <div class="hero-slide">
+          <div class="hero-issue">cat contact.txt</div>
+          <div class="hero-output hero-contact">
+            <p><span class="hero-contact-key">Email</span>     : <a href="mailto:mohdfaisal9072@gmail.com">mohdfaisal9072@gmail.com</a></p>
+            <p><span class="hero-contact-key">GitHub</span>     : <a href="https://github.com/faisalpdev" target="_blank" rel="noopener noreferrer">github.com/faisalpdev</a></p>
+            <p><span class="hero-contact-key">LinkedIn</span>   : <a href="https://linkedin.com/in/faisal-p/" target="_blank" rel="noopener noreferrer">linkedin.com/in/faisal-p/</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
